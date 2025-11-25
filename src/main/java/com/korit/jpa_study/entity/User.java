@@ -1,5 +1,6 @@
-package com.korit.spring_boot_jpa_study.entity;
+package com.korit.jpa_study.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +12,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Post {
-    private Integer todoId;
-    private String title;
-    private String content;
+@Entity
+@Table(name = "user_tb")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+    private String username;
+    private String password;
+    private String email;
     private LocalDateTime createDt;
     private LocalDateTime updateDt;
 }

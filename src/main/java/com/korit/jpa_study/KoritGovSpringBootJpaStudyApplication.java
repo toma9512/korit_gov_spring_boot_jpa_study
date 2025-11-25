@@ -1,4 +1,4 @@
-package com.korit.spring_boot_jpa_study;
+package com.korit.jpa_study;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

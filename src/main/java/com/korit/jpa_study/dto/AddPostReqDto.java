@@ -1,8 +1,10 @@
-package com.korit.spring_boot_jpa_study.dto;
+package com.korit.jpa_study.dto;
 
-import com.korit.spring_boot_jpa_study.entity.Post;
+import com.korit.jpa_study.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +18,7 @@ public class AddPostReqDto {
                 .title(title)
                 .content(content)
                 .userId(userId)
+                .createDt(LocalDateTime.now())
                 .build();
     }
 }
