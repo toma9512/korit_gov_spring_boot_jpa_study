@@ -48,11 +48,10 @@ public class PostService {
             return new ApiRespDto<>("failed", "존재하지 않는 게시글", null);
         }
 
-        Post post = foundPost.get().builder()
-                .title(editPostReqDto.getTitle())
-                .content(editPostReqDto.getContent())
-                .updateDt(LocalDateTime.now())
-                .build();
+        Post post = foundPost.get();
+        post.setTitle(editPostReqDto.getTitle());
+        post.setContent(editPostReqDto.getContent());
+        post.setUpdateDt(LocalDateTime.now());
         return new ApiRespDto<>("success", "수정 성공", postRepository.save(post));
     }
 
