@@ -4,7 +4,9 @@ import com.korit.jpa_study.dto.AddPostReqDto;
 import com.korit.jpa_study.dto.ApiRespDto;
 import com.korit.jpa_study.dto.EditPostReqDto;
 import com.korit.jpa_study.entity.Post;
+import com.korit.jpa_study.entity.User;
 import com.korit.jpa_study.repository.PostRepository;
+import com.korit.jpa_study.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,16 @@ import java.util.Optional;
 public class PostService {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public ApiRespDto<?> addPost(AddPostReqDto addPostReqDto) {
-        Optional<Post> foundPost = postRepository.findByTitle(addPostReqDto.getTitle());
+        Optional<User> foundUser = userRepository.findUserByUserId(addPostReqDto.getUserId());
+        if (foundUser.isEmpty()) {
+            return new ApiRespDto<>("failed", "회원 정보가 없습니다.", addPostReqDto.getUserId());
+        }
 
+        Optional<Post> foundPost = postRepository.findByTitle(addPostReqDto.getTitle());
         if (foundPost.isPresent()) {
             return new ApiRespDto<>("failed", "중복된 title", addPostReqDto.getTitle());
         }
